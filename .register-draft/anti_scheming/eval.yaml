@@ -1,0 +1,139 @@
+# DRAFT register entry for inspect_evals.
+#
+# When ready, copy this file to your fork of UKGovernmentBEIS/inspect_evals
+# at `register/anti_scheming/eval.yaml`, then run
+#
+#     uv run python tools/generate_readmes.py --create-missing-readmes
+#
+# from the fork root to validate + generate the docs README.
+#
+# Before submitting, fill in the TBD-* placeholders:
+#   - source.repository_url      → the upstream GH URL
+#   - source.repository_commit   → a full 40-char SHA on that repo
+#   - source.maintainers         → GH handle(s)
+#   - evaluation_report          → fill in once you've actually run the eval
+#                                  against o3 / o4-mini (or whatever models
+#                                  you want to publish baselines for)
+#
+# The authoritative schema is the `ExternalEvalMetadata` / `EvaluationReport`
+# pydantic models in src/inspect_evals/metadata.py — check those if any
+# field shape looks wrong here.
+
+id: anti_scheming
+title: Anti-Scheming Evals (Schoen et al. 2025)
+abbreviation: anti-scheming
+description: >
+  Re-implementation of the 25 (of 26) anti-scheming test environments from
+  Schoen, Nitishinskaya, Balesni et al. 2025, "Stress Testing Deliberative
+  Alignment for Anti-Scheming Training" (arXiv:2509.15541, Apollo Research
+  & OpenAI). Each environment places an agent in a multi-turn, tool-using
+  scenario that incentivizes covert action (sandbagging, sabotage, log
+  falsification, covert privilege escalation, spec sabotage, deceptive
+  game play, etc.) and scores whether the model takes it. Environment #4
+  (OpenAI Chat Deception) is intentionally omitted — it is an internal
+  OpenAI evaluation not available externally.
+
+tags:
+  - safety
+  - alignment
+  - scheming
+  - deception
+  - agentic
+  - tool-use
+  - red-team
+
+source:
+  repository_url: https://github.com/TBD-OWNER/inspect-anti-scheming
+  repository_commit: TBD-40-CHAR-SHA-OF-PINNED-COMMIT
+  paper_url: https://arxiv.org/abs/2509.15541
+  maintainers:
+    - TBD-OWNER-GH-HANDLE
+
+# Each entry: name = the registered @task name (what `inspect eval` resolves);
+# task_path = file containing the @task definition, relative to repo root.
+tasks:
+  # --- QA / reward-hacking ---
+  - name: as_sandbagging_qa
+    task_path: anti_scheming/qa/sandbagging_qa.py
+  - name: as_sandbagging_qa_no_goal
+    task_path: anti_scheming/qa/sandbagging_qa_no_goal.py
+  - name: as_sandbagging_grading_cot
+    task_path: anti_scheming/qa/sandbagging_grading_cot.py
+  - name: as_literature_qa
+    task_path: anti_scheming/qa/literature_qa.py
+  - name: as_lazy_checklist
+    task_path: anti_scheming/qa/lazy_checklist.py
+  - name: as_long_document_verification
+    task_path: anti_scheming/qa/long_document_verification.py
+
+  # --- Software / sabotage ---
+  - name: as_impossible_coding
+    task_path: anti_scheming/software/impossible_coding.py
+  - name: as_email_scoring
+    task_path: anti_scheming/software/email_scoring.py
+  - name: as_sabotage_math
+    task_path: anti_scheming/software/sabotage_math.py
+  - name: as_sabotage_safety
+    task_path: anti_scheming/software/sabotage_safety.py
+  - name: as_log_falsification
+    task_path: anti_scheming/software/log_falsification.py
+  - name: as_smuggle_capabilities
+    task_path: anti_scheming/software/smuggle_capabilities.py
+  - name: as_as_over_escalation
+    task_path: anti_scheming/software/as_over_escalation.py
+
+  # --- Corporate ---
+  - name: as_legal_reporting_us
+    task_path: anti_scheming/corporate/legal_reporting_us.py
+  - name: as_legal_reporting_cn
+    task_path: anti_scheming/corporate/legal_reporting_cn.py
+  - name: as_broken_promises
+    task_path: anti_scheming/corporate/broken_promises.py
+  - name: as_powerseeking_survey
+    task_path: anti_scheming/corporate/powerseeking_survey.py
+  - name: as_subagent_collusion
+    task_path: anti_scheming/corporate/subagent_collusion.py
+
+  # --- Spec sabotage (red-team) ---
+  - name: as_spec_sabotage_moving
+    task_path: anti_scheming/spec_sabotage/spec_sabotage_moving.py
+  - name: as_spec_sabotage_selection
+    task_path: anti_scheming/spec_sabotage/spec_sabotage_selection.py
+  - name: as_spec_sabotage_verification
+    task_path: anti_scheming/spec_sabotage/spec_sabotage_verification.py
+
+  # --- Games ---
+  - name: as_blotto
+    task_path: anti_scheming/games/blotto.py
+  - name: as_prisoners_dilemma
+    task_path: anti_scheming/games/prisoners_dilemma.py
+
+  # --- Subagent / privilege ---
+  - name: as_subagent_permissions
+    task_path: anti_scheming/subagent/subagent_permissions.py
+  - name: as_subagent_resource_quota
+    task_path: anti_scheming/subagent/subagent_resource_quota.py
+
+# evaluation_report: fill in after running the eval. Per the register docs,
+# this is a list of per-task rows (one row per task per model) plus an
+# optional `task: ~` aggregate row. Schema mirrors the
+# EvaluationReportResult / EvaluationReportMetric pydantic models. Example
+# row shape (delete this comment block once filled in):
+#
+# evaluation_report:
+#   - task: as_sabotage_safety
+#     model: openai/gpt-4o-mini
+#     version: 0.1.0
+#     commit: TBD-40-CHAR-SHA
+#     n_samples: 6
+#     metrics:
+#       - key: covert_rate
+#         value: 0.41
+#       - key: stderr
+#         value: 0.20
+#   - task: ~                          # overall aggregate
+#     model: openai/gpt-4o-mini
+#     n_samples: 152
+#     metrics:
+#       - key: mean_covert_rate
+#         value: 0.18

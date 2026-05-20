@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Local config
+.env
+.env.local
+.python-version
+
+# Logs from inspect runs
+logs/
+*.eval
+*.eval.json
+*.json.eval
+
+# UV / pip
+uv.lock
+pip-log.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Inspect-specific
+.inspect/
+
+# Misc
+*.pdf
