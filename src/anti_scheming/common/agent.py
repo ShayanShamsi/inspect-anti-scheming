@@ -6,7 +6,7 @@ from inspect_ai.agent import AgentPrompt, as_solver, react
 from inspect_ai.solver import Solver
 from inspect_ai.tool import Tool
 
-from .prompts import ANTI_SCHEMING_SPEC, DEFAULT_SYSTEM
+from anti_scheming.common.prompts import ANTI_SCHEMING_SPEC, DEFAULT_SYSTEM
 
 
 def scheming_agent(

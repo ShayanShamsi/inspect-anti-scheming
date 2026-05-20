@@ -65,6 +65,19 @@ to avoid per-sample Docker container churn. For envs that support a real
 sandbox (`sabotage_safety`, `impossible_coding`), pass `--backend=docker` to
 the task — see each module's docstring for env-specific knobs.
 
+### OpenRouter / OpenAI strict tool schema
+
+Two envs (`email_scoring`, `as_over_escalation`) use Inspect's built-in
+`bash_session()` / `text_editor()` tools. When routing through OpenRouter
+to an OpenAI-served model (`openrouter/openai/...`), OpenAI's strict-mode
+tool-schema validation rejects these built-ins because some optional
+parameters (`file_text`, `input`) are typed as nullable via `anyOf` but
+aren't included in `required`. The two envs run cleanly against models
+that don't enforce strict mode (Anthropic via OpenRouter, direct OpenAI
+without strict mode, mockllm, etc.). The baseline numbers in the register
+entry route those two envs through `openrouter/anthropic/claude-haiku-4.5`
+to work around this; everything else runs on `openrouter/openai/gpt-4o-mini`.
+
 ## Anti-scheming spec
 
 Tasks accept a `with_spec: bool = False` parameter. Setting it to `True`

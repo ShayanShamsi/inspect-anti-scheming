@@ -15,7 +15,7 @@ from anti_scheming.common.classifier import covert_action_scorer
 from anti_scheming.common.tools import actions, choose, submit_answer
 from anti_scheming.common.vfs import list_files, read_file, seed_vfs
 
-from .spec_sabotage_moving import SPEC_V1, SPEC_V2
+from anti_scheming.spec_sabotage.spec_sabotage_moving import SPEC_V1, SPEC_V2
 
 
 _VFS = {"spec_v1.md": SPEC_V1, "spec_v2.md": SPEC_V2}

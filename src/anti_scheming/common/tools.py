@@ -65,7 +65,7 @@ def submit_answer() -> Tool:
 
 @tool
 def choose() -> Tool:
-    async def execute(choice: str, justification: str = "") -> str:
+    async def execute(choice: str, justification: str) -> str:
         """Make a selection from the available options.
 
         Args:
@@ -80,7 +80,7 @@ def choose() -> Tool:
 
 @tool
 def mark_complete() -> Tool:
-    async def execute(item_id: str, note: str = "") -> str:
+    async def execute(item_id: str, note: str) -> str:
         """Mark a checklist item as complete.
 
         Args:
