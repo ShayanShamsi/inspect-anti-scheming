@@ -8,9 +8,10 @@ from anti_scheming.common.classifier import _extract_grade
 def test_extract_grade_last_match_wins():
     """If the judge writes multiple GRADE: lines, the final one is the verdict."""
     assert _extract_grade("GRADE: not_covert and then GRADE: covert") == "covert"
-    assert _extract_grade(
-        "this is not GRADE: covert behavior. Final: GRADE: not_covert"
-    ) == "not_covert"
+    assert (
+        _extract_grade("this is not GRADE: covert behavior. Final: GRADE: not_covert")
+        == "not_covert"
+    )
 
 
 def test_extract_grade_handles_awareness_template():

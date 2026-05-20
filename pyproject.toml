@@ -6,7 +6,7 @@ readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
 authors = [
-    { name = "TBD-OWNER" },
+    { name = "Muhammad Shayan Shamsi" },
 ]
 keywords = ["inspect-ai", "evaluation", "ai-safety", "scheming", "alignment"]
 classifiers = [
@@ -32,8 +32,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/TBD-OWNER/inspect-anti-scheming"
-Repository = "https://github.com/TBD-OWNER/inspect-anti-scheming"
+Homepage = "https://github.com/ShayanShamsi/inspect-anti-scheming"
+Repository = "https://github.com/ShayanShamsi/inspect-anti-scheming"
 Paper = "https://arxiv.org/abs/2509.15541"
 
 [build-system]
@@ -41,11 +41,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["anti_scheming"]
+packages = ["src/anti_scheming"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+pythonpath = ["src"]
 
 [tool.ruff]
 line-length = 100
