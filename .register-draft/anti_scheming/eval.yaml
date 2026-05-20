@@ -44,7 +44,7 @@ tags:
 
 source:
   repository_url: https://github.com/ShayanShamsi/inspect-anti-scheming
-  repository_commit: TBD-40-CHAR-SHA-OF-PINNED-COMMIT
+  repository_commit: 35f55635d3de064d5a5840cf8aac7a9d385c78ea
   paper_url: https://arxiv.org/abs/2509.15541
   maintainers:
     - ShayanShamsi
